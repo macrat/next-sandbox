@@ -6,9 +6,27 @@ const initialState = {
 };
 
 
-function reducer(state = initialState, action) {
+export type State = {
+    count: number,
+};
+
+
+const INCREMENT = 'INCREMENT' as const;
+
+
+export const increment = () => ({
+    type: INCREMENT,
+});
+
+
+type Actions = (
+    | ReturnType<typeof increment>
+);
+
+
+function reducer(state = initialState, action: Actions) {
     switch (action.type) {
-    case 'INCREMENT':
+    case INCREMENT:
         return {
             ...state,
             count: state.count + 1,

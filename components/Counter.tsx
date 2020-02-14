@@ -1,14 +1,16 @@
 import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 
+import {increment, State} from '../store';
+
 
 const useCounter = () => {
-    const count = useSelector(state => state.count);
+    const count = useSelector((state: State) => state.count);
     const dispatch = useDispatch();
 
     return {
         count: count,
-        increment: () => dispatch({type: 'INCREMENT'}),
+        increment: () => dispatch(increment()),
     };
 };
 

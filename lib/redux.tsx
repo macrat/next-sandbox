@@ -1,10 +1,13 @@
+import {Store} from 'redux';
+import {ReactNode} from 'react';
+import {NextPage, NextPageContext} from 'next';
 import {Provider} from 'react-redux';
 
-import {initializeStore} from '../store';
+import {initializeStore, State} from '../store';
 
 
-let _store;
-const getStore = initialState => {
+let _store: Store<State>;
+const getStore = (initialState?: State) => {
     if (typeof window === 'undefined') return initializeStore(initialState);
 
     if (!_store) _store = initializeStore(initialState);
@@ -13,16 +16,16 @@ const getStore = initialState => {
 };
 
 
-export default (PageComponent, {ssr = true} = {}) => {
-    const WithRedux = ({initialReduxState, ...props}) => (
+export default (PageComponent: NextPage, {ssr = true} = {}) => {
+    const WithRedux = ({initialReduxState, ...props}: {initialReduxState: Store}) => (
         <Provider store={getStore()}>
             <PageComponent {...props} />
         </Provider>
     );
 
     if (ssr || PageComponent.getInitialProps) {
-        WithRedux.getInitialProps = async context => {
-            context.store = getStore();
+        WithRedux.getInitialProps = async (context: NextPageContext) => {
+            const store = getStore();
 
             const pageProps = (
                 typeof PageComponent.getInitialProps === 'function'
@@ -32,7 +35,7 @@ export default (PageComponent, {ssr = true} = {}) => {
 
             return {
                 ...pageProps,
-                initialState: context.store.getState(),
+                initialState: store.getState(),
             };
         };
     }
