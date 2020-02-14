@@ -30,7 +30,7 @@ function PageList() {
 export default function Index() {
     return (
         <Layout>
-            <h1>hello world!</h1>
+            <h1>hello world! - develop branch</h1>
             <p><Counter /><Counter /><Counter /></p>
             <PageList />
         </Layout>
