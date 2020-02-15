@@ -1,6 +1,6 @@
 import {AppProps} from 'next/app';
 
-import withRedux from '../lib/redux';
+import withRedux from '../store/withRedux';
 
 
 export default function App({Component, pageProps}: AppProps) {
