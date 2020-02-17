@@ -9,6 +9,7 @@ export default function Header() {
                 <li><Link href="/about"><a>About</a></Link></li>
                 <li><Link href="/async"><a>Async</a></Link></li>
                 <li><Link href="/lazy-load"><a>LazyLoad</a></Link></li>
+                <li><Link href="/context"><a>Context</a></Link></li>
             </ul>
             <style jsx>{`
                 ul {
