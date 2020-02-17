@@ -12,6 +12,11 @@ export default function Header() {
                 <li><Link href="/context"><a>Context</a></Link></li>
             </ul>
             <style jsx>{`
+                header {
+                    border-bottom: 1px solid #666;
+                    padding-bottom: 4px;
+                    margin-bottom: 6px;
+                }
                 ul {
                     margin: 0;
                     padding: 0;
