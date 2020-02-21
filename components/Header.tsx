@@ -11,6 +11,7 @@ export default function Header() {
                 <li><Link href="/lazy-load"><a>LazyLoad</a></Link></li>
                 <li><Link href="/context"><a>Context</a></Link></li>
                 <li><Link href="/multi-fetch"><a>MultiFetch</a></Link></li>
+                <li><Link href="/swr"><a>SWR</a></Link></li>
             </ul>
             <style jsx>{`
                 header {
