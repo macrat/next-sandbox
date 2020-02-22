@@ -1,28 +1,38 @@
-import {ReactNode} from 'react';
-import {NextPage} from 'next';
+import {FC} from 'react';
 import axios from 'axios';
 import useSWR from 'swr';
 import Link from 'next/link';
 
-import Layout from '../components/Layout';
+import {APIData} from './api/posts';
+
 import Counter from '../components/Counter';
 
 
-const PostLink: NextPage<{title: string, children: ReactNode}> = ({title, children}) => (
-    <Link href="/post/[title]" as={`/post/${title}`}><a>{children}</a></Link>
+const PostLink: FC<{href: string}> = ({href, children}) => (
+    <Link href={href}><a>{children}</a></Link>
+);
+
+
+const DateTime: FC<{time: Date}> = ({time}) => (
+    <time dateTime={time.toISOString()}>
+        {`${time.getFullYear()}/${time.getMonth() + 1}/${time.getDate()} ${time.getHours()}:${String(time.getMinutes()).padStart(2, '0')}`}
+    </time>
 );
 
 
 function PageList() {
-    const {data, error} = useSWR('/api', url => axios.get(url).then(x => x.data));
+    const {data, error} = useSWR<APIData>('/api/posts', url => axios.get(url).then(x => x.data));
 
     if (error) return <>Failed: <pre>{error}</pre></>;
     if (!data) return <>Loading...</>;
 
     return (
         <ul>
-            {data.pages.map((x: string) => (
-                <li key={x}><PostLink title={x}>this is "{x}"</PostLink></li>
+            {data.posts.map(x => (
+                <li key={x.path}><PostLink href={x.path}>
+                    <DateTime time={new Date(x.createdAt)} />
+                    {` ${x.title}`}
+                </PostLink></li>
             ))}
         </ul>
     );
@@ -31,10 +41,10 @@ function PageList() {
 
 export default function Index() {
     return (
-        <Layout>
+        <>
             <h1>hello world!</h1>
-            <p><Counter /><Counter /><Counter /></p>
             <PageList />
-        </Layout>
+            <p><Counter /><Counter /><Counter /></p>
+        </>
     );
 }

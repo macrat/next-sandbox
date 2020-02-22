@@ -1,7 +1,5 @@
 import {useState, createContext, useContext, FC} from 'react';
 
-import Layout from '../components/Layout';
-
 
 interface ColorContextType {
     color: string
@@ -69,12 +67,10 @@ const ColorProvider: FC<{initialColor?: string}> = ({children, initialColor='red
 
 
 const Context: FC<{}> = () => (
-    <Layout>
-        <ColorProvider>
-            <ColorViewer />
-            <ColorPicker />
-        </ColorProvider>
-    </Layout>
+    <ColorProvider>
+        <ColorViewer />
+        <ColorPicker />
+    </ColorProvider>
 )
 
 

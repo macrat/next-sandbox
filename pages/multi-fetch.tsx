@@ -2,8 +2,6 @@ import {useState} from 'react';
 import useSWR from 'swr';
 import axios from 'axios';
 
-import Layout from '../components/Layout';
-
 
 const FetchTimer = () => {
     const [stime, _] = useState<number>(new Date().getTime());
@@ -49,7 +47,7 @@ const MultiFetch = () => {
     const [count, setCount] = useState<number>(1);
 
     return (
-        <Layout>
+        <>
             {[...new Array(count)].map((_, i) => (
                 <FetchTimer key={i} />
             ))}
@@ -66,7 +64,7 @@ const MultiFetch = () => {
                     border-radius: 48px;
                 }
             `}</style>
-        </Layout>
+        </>
     );
 };
 

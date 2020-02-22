@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-import Layout from '../components/Layout';
-
 
 interface TVShow {
     id: number,
@@ -15,7 +13,7 @@ interface TVShow {
 
 function Async({shows}: {shows?: TVShow[]}) {
     return (
-        <Layout>
+        <>
             <h1>Batman TV Shows</h1>
             <ul>
                 {shows && shows.map(show => (
@@ -24,7 +22,7 @@ function Async({shows}: {shows?: TVShow[]}) {
                     </li>
                 ))}
             </ul>
-        </Layout>
+        </>
     );
 }
 
