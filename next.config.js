@@ -8,6 +8,14 @@ const withMDX = require('@next/mdx')({
 });
 
 
+const fs = require('fs');
+
+const posts = fs.readdirSync('./pages/post').filter(name => name.match(/\.mdx$/));
+
+
 module.exports = withBundleAnalyzer(withMDX({
     pageExtensions: ['ts', 'tsx', 'mdx'],
+    env: {
+        posts: JSON.stringify(posts),
+    },
 }));

@@ -1,5 +1,3 @@
-import fs from 'fs';
-
 import {NextApiRequest, NextApiResponse} from 'next';
 
 
@@ -13,7 +11,7 @@ export type APIData = {
 
 
 export default async (req: NextApiRequest, res: NextApiResponse<APIData>) => {
-    const files = (await fs.promises.readdir('./pages/post')).filter(name => name.match(/\.mdx$/));
+    const files = JSON.parse(process.env.posts) as string[];
 
     const posts = await Promise.all(files.map(async name => ({
         ...(await import(`../post/${name}`)).metadata,
