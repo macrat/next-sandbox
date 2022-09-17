@@ -1,2 +1,2 @@
-next sandbox
-============
+Next.js sandbox
+===============
